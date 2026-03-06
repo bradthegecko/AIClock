@@ -1,39 +1,30 @@
-import sounddevice as sd
+import subprocess
 from faster_whisper import WhisperModel
-from scipy.io.wavfile import write
-import numpy as np
 
-# Microphone device index from sounddevice query
-MIC_DEVICE = 1
-
-# Recording settings
-SAMPLE_RATE = 48000
+SAMPLE_RATE = 16000
 DURATION = 5
+OUTPUT_FILE = "speech.wav"
+MIC_DEVICE = "plughw:CARD=Device,DEV=0"
 
 print("Recording for 5 seconds...")
 
-audio = sd.rec(
-    int(SAMPLE_RATE * DURATION),
-    samplerate=SAMPLE_RATE,
-    channels=1,
-    device=MIC_DEVICE,
-    dtype="int16",
-)
-
-sd.wait()
-
-print("Saving audio...")
-write("speech.wav", SAMPLE_RATE, audio)
+subprocess.run([
+    "arecord",
+    "-D", MIC_DEVICE,
+    "-f", "S16_LE",
+    "-r", str(SAMPLE_RATE),
+    "-c", "1",
+    "-d", str(DURATION),
+    OUTPUT_FILE
+], check=True)
 
 print("Loading speech model...")
 model = WhisperModel("base", compute_type="int8")
 
 print("Transcribing...")
-
-segments, info = model.transcribe("speech.wav")
+segments, info = model.transcribe(OUTPUT_FILE, language="en")
 
 print("\nYou said:")
-
 for segment in segments:
     print(segment.text)
 

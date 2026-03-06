@@ -211,3 +211,10 @@ __pycache__/
 *.wav
 *.pyc
 voices/*.onnx
+
+
+speech.wav
+status.json
+__pycache__/
+*.pyc
+venv/
