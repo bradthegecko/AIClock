@@ -8,7 +8,7 @@
     :root {
       --bg1: #0b1020;
       --bg2: #151b33;
-      --card: rgba(255,255,255,0.08);
+      --card: rgba(255,255,255,0.02);
       --border: rgba(255,255,255,0.14);
       --text: #f6f8ff;
       --muted: #b8c0de;
@@ -33,133 +33,152 @@
       overflow: hidden;
     }
 
-body.clear-day {
-  background:
-    linear-gradient(rgba(10,16,32,0.25), rgba(10,16,32,0.25)),
-    url("backgrounds/clear_day.jpg") center center / cover no-repeat fixed;
-}
+    body.clear-day {
+      background:
+        linear-gradient(rgba(10,16,32,0.25), rgba(10,16,32,0.25)),
+        url("backgrounds/clear_day.jpg") center center / cover no-repeat fixed;
+    }
 
-body.clear-night {
-  background:
-    linear-gradient(rgba(10,16,32,0.45), rgba(10,16,32,0.45)),
-    url("backgrounds/clear_night.jpg") center center / cover no-repeat fixed;
-}
+    body.clear-night {
+      background:
+        linear-gradient(rgba(10,16,32,0.45), rgba(10,16,32,0.45)),
+        url("backgrounds/clear_night.jpg") center center / cover no-repeat fixed;
+    }
 
-body.cloudy-day {
-  background:
-    linear-gradient(rgba(10,16,32,0.35), rgba(10,16,32,0.35)),
-    url("backgrounds/cloudy_day.jpg") center center / cover no-repeat fixed;
-}
+    body.cloudy-day {
+      background:
+        linear-gradient(rgba(10,16,32,0.35), rgba(10,16,32,0.35)),
+        url("backgrounds/cloudy_day.jpg") center center / cover no-repeat fixed;
+    }
 
-body.cloudy-night {
-  background:
-    linear-gradient(rgba(10,16,32,0.5), rgba(10,16,32,0.5)),
-    url("backgrounds/cloudy_night.jpg") center center / cover no-repeat fixed;
-}
+    body.cloudy-night {
+      background:
+        linear-gradient(rgba(10,16,32,0.50), rgba(10,16,32,0.50)),
+        url("backgrounds/cloudy_night.jpg") center center / cover no-repeat fixed;
+    }
 
-body.rainy-day {
-  background:
-    linear-gradient(rgba(10,16,32,0.45), rgba(10,16,32,0.45)),
-    url("backgrounds/rain_day.jpg") center center / cover no-repeat fixed;
-}
+    body.rainy-day {
+      background:
+        linear-gradient(rgba(10,16,32,0.45), rgba(10,16,32,0.45)),
+        url("backgrounds/rain_day.jpg") center center / cover no-repeat fixed;
+    }
 
-body.rainy-night {
-  background:
-    linear-gradient(rgba(10,16,32,0.55), rgba(10,16,32,0.55)),
-    url("backgrounds/rain_night.jpg") center center / cover no-repeat fixed;
-}
+    body.rainy-night {
+      background:
+        linear-gradient(rgba(10,16,32,0.55), rgba(10,16,32,0.55)),
+        url("backgrounds/rain_night.jpg") center center / cover no-repeat fixed;
+    }
 
-body.snowy-day {
-  background:
-    linear-gradient(rgba(10,16,32,0.3), rgba(10,16,32,0.3)),
-    url("backgrounds/snow_day.jpg") center center / cover no-repeat fixed;
-}
+    body.snowy-day {
+      background:
+        linear-gradient(rgba(10,16,32,0.30), rgba(10,16,32,0.30)),
+        url("backgrounds/snow_day.jpg") center center / cover no-repeat fixed;
+    }
 
-body.snowy-night {
-  background:
-    linear-gradient(rgba(10,16,32,0.5), rgba(10,16,32,0.5)),
-    url("backgrounds/snow_night.jpg") center center / cover no-repeat fixed;
-}
+    body.snowy-night {
+      background:
+        linear-gradient(rgba(10,16,32,0.50), rgba(10,16,32,0.50)),
+        url("backgrounds/snow_night.jpg") center center / cover no-repeat fixed;
+    }
 
-body.storm-day,
-body.storm-night {
-  background:
-    linear-gradient(rgba(10,16,32,0.6), rgba(10,16,32,0.6)),
-    url("backgrounds/storm.jpg") center center / cover no-repeat fixed;
-}
+    body.storm-day,
+    body.storm-night {
+      background:
+        linear-gradient(rgba(10,16,32,0.60), rgba(10,16,32,0.60)),
+        url("backgrounds/storm.jpg") center center / cover no-repeat fixed;
+    }
 
-body.fog-day,
-body.fog-night {
-  background:
-    linear-gradient(rgba(10,16,32,0.45), rgba(10,16,32,0.45)),
-    url("backgrounds/fog.jpg") center center / cover no-repeat fixed;
-}
-
+    body.fog-day,
+    body.fog-night {
+      background:
+        linear-gradient(rgba(10,16,32,0.45), rgba(10,16,32,0.45)),
+        url("backgrounds/fog.jpg") center center / cover no-repeat fixed;
+    }
 
     .shell {
-  width: 96vw;
-  height: 92vh;
-  display: grid;
-  grid-template-columns: 2fr 1.3fr;
-  gap: 24px;
-  align-items: stretch;
-}
+      width: 96vw;
+      height: 94vh;
+      position: relative;
+    }
 
     .panel {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 28px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      border-radius: 26px;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
       box-shadow: var(--shadow);
-      padding: 36px;
     }
 
     .clock-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100;   
- }
+      position: absolute;
+      inset: 0;
+      padding: 22px;
+      z-index: 1;
+    }
 
     .eyebrow {
-      font-size: 0.95rem;
+      font-size: 0.78rem;
       color: var(--muted);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     .time {
-      font-size: clamp(8rem, 18vw, 18rem);
+      font-size: clamp(5.6rem, 17vw, 8.2rem);
       line-height: 0.9;
       font-weight: 800;
       letter-spacing: -0.05em;
-      margin: 10px 0;
+      margin: 10px 0 6px;
+      max-width: 58%;
     }
 
     .date {
-      font-size: clamp(1.2rem, 2.6vw, 2rem);
+      font-size: clamp(1.2rem, 3.4vw, 1.8rem);
       color: var(--muted);
     }
 
-    .status-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 1rem;
+    .bottom-left {
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      z-index: 6;
     }
 
-    .assistant-status {
+    .activate-pill {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font: inherit;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.2s ease;
+    }
+
+    .activate-pill:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .activate-pill:active {
+      transform: scale(0.98);
+    }
+
+    .activate-pill.listening {
+      background: rgba(140,184,255,0.12);
+      border-color: rgba(140,184,255,0.30);
+      box-shadow: 0 0 22px rgba(140,184,255,0.14);
+    }
+
+    .activate-pill.responding {
+      background: rgba(142,240,181,0.10);
+      border-color: rgba(142,240,181,0.28);
+      box-shadow: 0 0 22px rgba(142,240,181,0.12);
     }
 
     .dot {
@@ -167,186 +186,237 @@ body.fog-night {
       height: 10px;
       border-radius: 50%;
       background: var(--good);
-      box-shadow: 0 0 0 8px rgba(142,240,181,0.12);
+      box-shadow: 0 0 0 8px rgba(142,240,181,0.10);
+      transition: all 0.25s ease;
+      flex-shrink: 0;
     }
 
-    .weather-panel {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
+    .activate-pill.listening .dot {
+      background: var(--accent);
+      box-shadow: 0 0 0 10px rgba(140,184,255,0.14);
+      animation: pulseDot 1s infinite;
     }
+
+    .activate-pill.responding .dot {
+      background: var(--good);
+      box-shadow: 0 0 0 10px rgba(142,240,181,0.12);
+      animation: pulseDot 0.8s infinite;
+    }
+
+    .timezone {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      z-index: 4;
+    }
+
+.weather-panel {
+  position: absolute;
+  right: 18px;
+  top: 20%;
+  transform: translateY(-20%);
+  width: 460px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  z-index: 3;
+  background: rgba(255,255,255,0.02);
+}
 
     .weather-top {
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
     }
 
-.weather-main {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.weather-icon {
-  font-size: clamp(4rem, 9vw, 6.5rem);
-  line-height: 1;
-font-family: "Noto Color Emoji", "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
-}
-}
-
     .location {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       color: var(--muted);
-      margin-top: 8px;
+    }
+
+    .weather-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .weather-icon {
+      font-size: clamp(2.8rem, 8vw, 4rem);
+      line-height: 1;
+      font-family: "Noto Color Emoji", "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
+      flex-shrink: 0;
+    }
+
+    .current-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .temp-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
     .temp {
-      font-size: clamp(4rem, 9vw, 7rem);
-      font-weight: 700;
+      font-size: clamp(2.8rem, 8vw, 4rem);
+      font-weight: 800;
       line-height: 1;
       letter-spacing: -0.04em;
     }
 
+    .highlow-inline {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
     .summary {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--text);
-      margin-top: 6px;
+      margin-top: 2px;
     }
 
     .weather-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-      margin-top: 10px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .tomorrow-block {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .tomorrow-title {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tomorrow-card {
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tomorrow-desc {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .tomorrow-temps {
+      font-size: 1rem;
+      font-weight: 800;
     }
 
     .stat {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.05);
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
       border: 1px solid rgba(255,255,255,0.08);
     }
 
     .stat-label {
-      font-size: 1.2rem;
+      font-size: 0.72rem;
       color: var(--muted);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .stat-value {
-      font-size: 2rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.15;
     }
 
-    .footer-note {
-      margin-top: auto;
-      color: var(--muted);
-      font-size: 0.92rem;
+.wind-block {
+  align-self: end;
+}
+
+
+
+    @keyframes pulseDot {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-
-.assistant-status {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.assistant-status.listening {
-  background: rgba(140,184,255,0.16);
-  border: 1px solid rgba(140,184,255,0.35);
-  box-shadow: 0 0 24px rgba(140,184,255,0.18);
-}
-
-.assistant-status.responding {
-  background: rgba(142,240,181,0.14);
-  border: 1px solid rgba(142,240,181,0.35);
-  box-shadow: 0 0 24px rgba(142,240,181,0.16);
-}
-
-.assistant-status.listening::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 999px;
-  border: 2px solid rgba(140,184,255,0.35);
-  animation: pulseRing 1.5s infinite;
-  pointer-events: none;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--good);
-  box-shadow: 0 0 0 8px rgba(142,240,181,0.12);
-  transition: all 0.3s ease;
-}
-
-.assistant-status.listening .dot {
-  background: #8cb8ff;
-  box-shadow: 0 0 0 10px rgba(140,184,255,0.18);
-  animation: pulseDot 1s infinite;
-}
-
-.assistant-status.responding .dot {
-  background: #8ef0b5;
-  box-shadow: 0 0 0 10px rgba(142,240,181,0.16);
-  animation: pulseDot 0.8s infinite;
-}
-
-.assistant-status.responding #assistant-text::after {
-  content: " ...";
-  animation: dots 1.2s steps(4, end) infinite;
-}
-
-@keyframes pulseDot {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.35);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes pulseRing {
-  0% {
-    transform: scale(0.98);
-    opacity: 0.7;
-  }
-  70% {
-    transform: scale(1.03);
-    opacity: 0.15;
-  }
-  100% {
-    transform: scale(1.05);
-    opacity: 0;
-  }
-}
-
-@keyframes dots {
-  0%   { content: " ."; }
-  33%  { content: " .."; }
-  66%  { content: " ..."; }
-  100% { content: " ."; }
-}
-
-    @media (max-width: 860px) {
-      .shell {
-        grid-template-columns: 1fr;
+    @media (max-width: 900px), (max-height: 500px) {
+      .clock-panel {
+        padding: 18px;
       }
 
-      .clock-panel,
+      .time {
+        font-size: clamp(5.2rem, 16vw, 7.6rem);
+        max-width: 55%;
+      }
+
+      .date {
+        font-size: 1rem;
+      }
+
+      .bottom-left {
+        left: 18px;
+        bottom: 18px;
+      }
+
+      .activate-pill {
+        padding: 9px 12px;
+        font-size: 0.82rem;
+      }
+
       .weather-panel {
-        min-height: unset;
+        right: 14px;
+        top: 100px;
+        width: 430px;
+        max-width: calc(100vw - 28px);
+        padding: 14px;
+      }
+
+      .stat {
+        padding: 8px 10px;
+      }
+
+      .stat-label {
+        font-size: 0.68rem;
+      }
+
+      .stat-value {
+        font-size: 0.88rem;
+      }
+
+      .tomorrow-desc {
+        font-size: 0.9rem;
+      }
+
+      .tomorrow-temps {
+        font-size: 0.95rem;
+      }
+
+      .highlow-inline {
+        font-size: 0.9rem;
+      }
+
+      .timezone {
+        right: 18px;
+        bottom: 18px;
+        font-size: 0.82rem;
       }
     }
   </style>
@@ -354,58 +424,60 @@ font-family: "Noto Color Emoji", "Segoe UI Emoji", "Apple Color Emoji", sans-ser
 <body>
   <main class="shell">
     <section class="panel clock-panel">
-      <div>
-        <div class="eyebrow">AI Clock</div>
-        <div class="time" id="time">--:--</div>
-        <div class="date" id="date">Loading date…</div>
+      <div class="eyebrow">AI Clock</div>
+      <div class="time" id="time">--:--</div>
+      <div class="date" id="date">Loading date…</div>
+
+      <div class="bottom-left">
+        <button class="activate-pill" id="activate-pill">
+          <span class="dot"></span>
+          <span id="assistant-text">Press or say "Alexa" to activate</span>
+        </button>
       </div>
 
-      <div class="status-row">
-        <div class="assistant-status" id="assistant-status">
-  <span class="dot" id="assistant-dot"></span>
-  <span id="assistant-text">Idle — waiting for wake word</span>
-</div>
-        <div id="timezone">America/New_York</div>
-      </div>
+      <div class="timezone" id="timezone">America/New_York</div>
     </section>
 
     <aside class="panel weather-panel">
       <div class="weather-top">
-        <div>
-          <div class="eyebrow">Current Weather</div>
-          <div class="location">Charlottesville, VA</div>
+        <div class="eyebrow">Current Weather</div>
+        <div class="location">Charlottesville, VA</div>
+
+        <div class="weather-main">
+          <div class="weather-icon" id="weather-icon">☀️</div>
+          <div class="current-meta">
+            <div class="temp-row">
+              <div class="temp" id="temperature">--°</div>
+              <div class="highlow-inline" id="highlow-inline">H: --° / L: --°</div>
+            </div>
+            <div class="summary" id="summary">Loading weather…</div>
+          </div>
         </div>
       </div>
 
-<div class="weather-main">
-  <div class="weather-icon" id="weather-icon">☀️</div>
-  <div>
-    <div class="temp" id="temperature">--°</div>
-    <div class="summary" id="summary">Loading weather…</div>
-  </div>
-</div>
-
       <div class="weather-grid">
-        <div class="stat">
+        <div class="stat wind-block">
           <div class="stat-label">Wind</div>
           <div class="stat-value" id="wind">-- mph</div>
         </div>
-        <div class="stat">
-          <div class="stat-label">Humidity</div>
-          <div class="stat-value" id="humidity">--%</div>
+
+        <div class="tomorrow-block">
+          <div class="tomorrow-title">Tomorrow</div>
+          <div class="tomorrow-card">
+            <div class="tomorrow-desc" id="tomorrow-desc">Loading…</div>
+            <div class="tomorrow-temps" id="tomorrow-temps">-- / --</div>
+          </div>
         </div>
+
         <div class="stat">
           <div class="stat-label">Feels Like</div>
           <div class="stat-value" id="apparent">--°</div>
         </div>
-        <div class="stat">
-          <div class="stat-label">Updated</div>
-          <div class="stat-value" id="updated">--</div>
-        </div>
-      </div>
 
-      <div class="footer-note" id="weather-note">
-        Weather data loading…
+        <div class="stat">
+          <div class="stat-label">Humidity</div>
+          <div class="stat-value" id="humidity">--%</div>
+        </div>
       </div>
     </aside>
   </main>
@@ -418,17 +490,14 @@ font-family: "Noto Color Emoji", "Segoe UI Emoji", "Apple Color Emoji", sans-ser
     const windEl = document.getElementById('wind');
     const humidityEl = document.getElementById('humidity');
     const apparentEl = document.getElementById('apparent');
-    const updatedEl = document.getElementById('updated');
-    const weatherNoteEl = document.getElementById('weather-note');
-const iconEl = document.getElementById('weather-icon');
-const assistantTextEl = document.getElementById('assistant-text');
-const assistantStatusEl = document.getElementById('assistant-status');
+    const highLowInlineEl = document.getElementById('highlow-inline');
+    const assistantTextEl = document.getElementById('assistant-text');
+    const activatePillEl = document.getElementById('activate-pill');
+    const iconEl = document.getElementById('weather-icon');
+    const tomorrowDescEl = document.getElementById('tomorrow-desc');
+    const tomorrowTempsEl = document.getElementById('tomorrow-temps');
 
-
-
-
-const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?latitude=38.0293&longitude=-78.4767&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,is_day&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FNew_York';
-
+    const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?latitude=38.0293&longitude=-78.4767&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FNew_York';
 
     const weatherCodeMap = {
       0: 'Clear sky',
@@ -461,78 +530,77 @@ const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?latitude=38.0293&lon
       99: 'Severe thunderstorm with hail'
     };
 
-
-async function updateStatus() {
-  try {
-    const response = await fetch('status.json?ts=' + Date.now(), { cache: 'no-store' });
-    const data = await response.json();
-    const statusText = data.assistant_status || 'Idle — waiting for wake word';
-
-    assistantTextEl.textContent = statusText;
-
-    assistantStatusEl.classList.remove('listening', 'responding');
-
-    if (statusText.toLowerCase().includes('listening')) {
-      assistantStatusEl.classList.add('listening');
-    } else if (
-      statusText.toLowerCase().includes('responding') ||
-      statusText.toLowerCase().includes('thinking') ||
-      statusText.toLowerCase().includes('speaking')
-    ) {
-      assistantStatusEl.classList.add('responding');
+    function shortWeatherLabel(code) {
+      const map = {
+        0: 'Clear',
+        1: 'Mostly clear',
+        2: 'Partly cloudy',
+        3: 'Cloudy',
+        45: 'Fog',
+        48: 'Fog',
+        51: 'Drizzle',
+        53: 'Drizzle',
+        55: 'Heavy drizzle',
+        56: 'Freezing drizzle',
+        57: 'Freezing drizzle',
+        61: 'Light rain',
+        63: 'Rain',
+        65: 'Heavy rain',
+        66: 'Freezing rain',
+        67: 'Freezing rain',
+        71: 'Light snow',
+        73: 'Snow',
+        75: 'Heavy snow',
+        77: 'Snow',
+        80: 'Showers',
+        81: 'Showers',
+        82: 'Heavy showers',
+        85: 'Snow showers',
+        86: 'Snow showers',
+        95: 'Storm',
+        96: 'Storm',
+        99: 'Storm'
+      };
+      return map[code] || 'Weather';
     }
-  } catch (error) {
-    assistantTextEl.textContent = 'Status unavailable';
-    assistantStatusEl.classList.remove('listening', 'responding');
-  }
-}
 
+    function getWeatherIcon(code, isDay) {
+      if (code === 0) return isDay ? '☀️' : '🌙';
+      if (code === 1) return isDay ? '🌤️' : '🌙';
+      if (code === 2) return isDay ? '⛅' : '☁️';
+      if (code === 3) return '☁️';
+      if ([45, 48].includes(code)) return '🌫️';
+      if ([51, 53, 61, 80].includes(code)) return '🌦️';
+      if ([55, 56, 57, 63, 65, 66, 67, 81].includes(code)) return '🌧️';
+      if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️';
+      if ([82, 95, 96, 99].includes(code)) return '⛈️';
+      return isDay ? '🌤️' : '🌙';
+    }
 
+    function setWeatherBackground(code, isDay) {
+      document.body.className = '';
+      const suffix = isDay ? 'day' : 'night';
 
-
-function getWeatherIcon(code, isDay) {
-  if (code === 0) return isDay ? '☀️' : '🌙';
-  if (code === 1) return isDay ? '🌤️' : '🌙';
-  if (code === 2) return isDay ? '⛅' : '☁️';
-  if (code === 3) return '☁️';
-
-  if ([45, 48].includes(code)) return '🌫️';
-
-  if ([51, 53, 61, 80].includes(code)) return '🌦️';
-  if ([55, 56, 57, 63, 65, 66, 67, 81].includes(code)) return '🌧️';
-
-  if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️';
-
-  if ([82, 95, 96, 99].includes(code)) return '⛈️';
-
-  return isDay ? '🌤️' : '🌙';
-}
-
-function setWeatherBackground(code, isDay) {
-  document.body.className = '';
-
-  const suffix = isDay ? 'day' : 'night';
-
-  if (code === 0 || code === 1) {
-    document.body.classList.add(`clear-${suffix}`);
-  } else if ([2, 3].includes(code)) {
-    document.body.classList.add(`cloudy-${suffix}`);
-  } else if ([45, 48].includes(code)) {
-    document.body.classList.add(`fog-${suffix}`);
-  } else if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81].includes(code)) {
-    document.body.classList.add(`rainy-${suffix}`);
-  } else if ([71, 73, 75, 77, 85, 86].includes(code)) {
-    document.body.classList.add(`snowy-${suffix}`);
-  } else if ([82, 95, 96, 99].includes(code)) {
-    document.body.classList.add(`storm-${suffix}`);
-  } else {
-    document.body.classList.add(`clear-${suffix}`);
-  }
-}
-
+      if (code === 0 || code === 1) {
+        document.body.classList.add(`clear-${suffix}`);
+      } else if ([2, 3].includes(code)) {
+        document.body.classList.add(`cloudy-${suffix}`);
+      } else if ([45, 48].includes(code)) {
+        document.body.classList.add(`fog-${suffix}`);
+      } else if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81].includes(code)) {
+        document.body.classList.add(`rainy-${suffix}`);
+      } else if ([71, 73, 75, 77, 85, 86].includes(code)) {
+        document.body.classList.add(`snowy-${suffix}`);
+      } else if ([82, 95, 96, 99].includes(code)) {
+        document.body.classList.add(`storm-${suffix}`);
+      } else {
+        document.body.classList.add(`clear-${suffix}`);
+      }
+    }
 
     function updateClock() {
       const now = new Date();
+
       timeEl.textContent = now.toLocaleTimeString([], {
         hour: 'numeric',
         minute: '2-digit'
@@ -545,6 +613,40 @@ function setWeatherBackground(code, isDay) {
       });
     }
 
+    async function updateStatus() {
+      try {
+        const response = await fetch('status.json?ts=' + Date.now(), { cache: 'no-store' });
+        const data = await response.json();
+        const statusText = data.assistant_status || 'Press or say "Alexa" to activate';
+
+        assistantTextEl.textContent = statusText;
+        activatePillEl.classList.remove('listening', 'responding');
+
+        const lower = statusText.toLowerCase();
+
+        if (lower.includes('listening')) {
+          activatePillEl.classList.add('listening');
+        } else if (
+          lower.includes('thinking') ||
+          lower.includes('speaking') ||
+          lower.includes('responding')
+        ) {
+          activatePillEl.classList.add('responding');
+        }
+      } catch (error) {
+        assistantTextEl.textContent = 'Press or say "Alexa" to activate';
+        activatePillEl.classList.remove('listening', 'responding');
+      }
+    }
+
+    async function triggerAssistant() {
+      try {
+        await fetch('/trigger', { method: 'POST' });
+      } catch (error) {
+        console.error('Trigger failed', error);
+      }
+    }
+
     async function updateWeather() {
       try {
         const response = await fetch(WEATHER_URL, { cache: 'no-store' });
@@ -552,43 +654,47 @@ function setWeatherBackground(code, isDay) {
 
         const data = await response.json();
         const current = data.current;
-const isDay = current.is_day === 1;
+        const daily = data.daily;
+        const isDay = current.is_day === 1;
 
         tempEl.textContent = `${Math.round(current.temperature_2m)}°F`;
         apparentEl.textContent = `${Math.round(current.apparent_temperature)}°F`;
         humidityEl.textContent = `${Math.round(current.relative_humidity_2m)}%`;
         windEl.textContent = `${Math.round(current.wind_speed_10m)} mph`;
         summaryEl.textContent = weatherCodeMap[current.weather_code] || `Code ${current.weather_code}`;
-iconEl.textContent = getWeatherIcon(current.weather_code, isDay);
-setWeatherBackground(current.weather_code, isDay);
+        iconEl.textContent = getWeatherIcon(current.weather_code, isDay);
+        setWeatherBackground(current.weather_code, isDay);
 
+        const todayHigh = Math.round(daily.temperature_2m_max[0]);
+        const todayLow = Math.round(daily.temperature_2m_min[0]);
+        highLowInlineEl.textContent = `H: ${todayHigh}° / L: ${todayLow}°`;
 
-        const updated = new Date(current.time);
-        updatedEl.textContent = updated.toLocaleTimeString([], {
-          hour: 'numeric',
-          minute: '2-digit'
-        });
+        const tomorrowDesc = shortWeatherLabel(daily.weather_code[1]);
+        const tomorrowHigh = Math.round(daily.temperature_2m_max[1]);
+        const tomorrowLow = Math.round(daily.temperature_2m_min[1]);
 
-        weatherNoteEl.textContent = 'Weather refreshes every 10 minutes.';
+        tomorrowDescEl.textContent = tomorrowDesc;
+        tomorrowTempsEl.textContent = `${tomorrowHigh}° / ${tomorrowLow}°`;
+      } catch (error) {
+        summaryEl.textContent = 'Unable to load weather';
+        tomorrowDescEl.textContent = 'Unavailable';
+        tomorrowTempsEl.textContent = '-- / --';
       }
-
-catch (error) {
-  summaryEl.textContent = 'Unable to load weather';
-  weatherNoteEl.textContent = `Weather fetch failed: ${error.message}`;
-  document.body.className = '';
-}
-
-
     }
 
+    activatePillEl.addEventListener('click', triggerAssistant);
+    activatePillEl.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      triggerAssistant();
+    });
 
-updateStatus();
-setInterval(updateStatus, 1000);
     updateClock();
     updateWeather();
+    updateStatus();
 
     setInterval(updateClock, 1000);
     setInterval(updateWeather, 10 * 60 * 1000);
+    setInterval(updateStatus, 1000);
   </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 import subprocess
 
 VOICE_MODEL = "voices/en_US-libritts_r-medium.onnx"
-SPEAKER_ID = 643
+SPEAKER_ID = 797
 AUDIO_DEVICE = "plughw:CARD=UACDemoV10,DEV=0"
 
 def speak(text):
