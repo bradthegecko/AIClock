@@ -4,6 +4,11 @@ import threading
 import time
 from pathlib import Path
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import quote_plus
+import re
+
+
+
 
 import numpy as np
 import requests
@@ -25,10 +30,24 @@ TARGET_CHUNK = 1280
 INPUT_CHUNK = int(TARGET_CHUNK * INPUT_RATE / TARGET_RATE)
 
 WAKEWORD_THRESHOLD = 0.65
-REQUIRED_CONSECUTIVE_HITS = 2
+REQUIRED_CONSECUTIVE_HITS = 1
 WAKE_DEBOUNCE_SECONDS = 6
 POST_ASSISTANT_COOLDOWN_SECONDS = 6
 WAKE_STREAM_WARMUP_SECONDS = 2.0
+
+
+CHAT_HISTORY = []
+MAX_HISTORY_EXCHANGES = 3
+
+
+CURRENT_INFO_KEYWORDS = [
+    "current", "today", "latest", "recent", "now", "died", "attack", "war", "ruler",
+    "president", "vice president", "governor", "mayor", 
+    "prime minister", "emir", "king", "queen", "ceo", "shortest",
+    "weather", "news", "score", "stock","movie","show", "biggest", "tallest", "price"
+]
+
+
 
 WHISPER_MODEL = WhisperModel("tiny", compute_type="int8")
 
@@ -231,7 +250,7 @@ def record_audio():
         "-f", "S16_LE",
         "-r", "16000",
         "-c", "1",
-        "-d", "5",
+        "-d", "8",
         "speech.wav"
     ], check=True)
 
@@ -239,6 +258,17 @@ def record_audio():
 def transcribe() -> str:
     segments, _ = WHISPER_MODEL.transcribe("speech.wav", language="en")
     return "".join(segment.text for segment in segments).strip()
+
+def build_history_prompt(user_text: str) -> str:
+    history_lines = []
+
+    for item in CHAT_HISTORY[-(MAX_HISTORY_EXCHANGES * 2):]:
+        history_lines.append(f"{item['role']}: {item['content']}")
+
+    history_lines.append(f"User: {user_text}")
+
+    return "\n".join(history_lines)
+
 
 
 def ask_ai(prompt: str) -> str:
@@ -248,9 +278,17 @@ Respond conversationally and very briefly.
 Use one or two short sentences maximum.
 Do not give long explanations unless specifically asked.
 Avoid lists, markdown, and tangents.
+
+If the user asks for current events, recent facts, live information, office holders,
+news, weather, sports, or something that may have changed recently, or says the word current, or asks for who a president or political office holder is, or asks about a  president of a university, or says anyting that has to do with pop culture, or says anything that has to do with movies or tv shows, respond with exactly:
+SEARCH_WEB
+
+For stable general-knowledge questions, answer directly without using SEARCH_WEB.
 """.strip()
 
-    full_prompt = f"{system_prompt}\n\nUser: {prompt}\nAssistant:"
+    conversation_prompt = build_history_prompt(prompt)
+
+    full_prompt = f"{system_prompt}\n\n{conversation_prompt}\nAssistant:"
 
     response = requests.post(
         "http://localhost:11434/api/generate",
@@ -263,6 +301,162 @@ Avoid lists, markdown, and tangents.
     )
     response.raise_for_status()
     return response.json()["response"].strip()
+
+
+def search_web(query: str, max_results: int = 3) -> list[dict]:
+    url = f"https://html.duckduckgo.com/html/?q={quote_plus(query)}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+    }
+
+    response = requests.get(url, headers=headers, timeout=15)
+    response.raise_for_status()
+    html = response.text
+
+    results = []
+
+    blocks = re.findall(
+        r'<a rel="nofollow" class="result__a" href="(.*?)".*?>(.*?)</a>.*?(?:<a class="result__snippet".*?>(.*?)</a>|<div class="result__snippet">(.*?)</div>)',
+        html,
+        flags=re.DOTALL
+    )
+
+    for block in blocks[:max_results]:
+        link = block[0]
+        title_html = block[1]
+        snippet_html = block[2] or block[3] or ""
+
+        title = re.sub(r"<.*?>", "", title_html)
+        snippet = re.sub(r"<.*?>", "", snippet_html)
+
+        title = re.sub(r"\s+", " ", title).strip()
+        snippet = re.sub(r"\s+", " ", snippet).strip()
+
+        # keep snippets short so Ollama doesn't choke
+        snippet = snippet[:180]
+
+        results.append({
+            "title": title,
+            "snippet": snippet,
+            "link": link
+        })
+
+    return results
+
+def format_search_results(results: list[dict]) -> str:
+    if not results:
+        return "No search results found."
+
+    lines = []
+    for i, item in enumerate(results, start=1):
+        lines.append(f"{i}. {item['title']}")
+        lines.append(f"Snippet: {item['snippet']}")
+        lines.append("")
+
+    return "\n".join(lines).strip()
+
+def summarize_search_results(user_question: str, search_results_text: str) -> str:
+    system_prompt = """
+You are a voice assistant running on a Raspberry Pi AI clock.
+Use the provided web search results to answer the user's question.
+Summarize the results naturally and briefly.
+Do not read links aloud.
+Do not quote large passages.
+Prefer the most likely correct and current answer from the search results.
+If the search results are weak or conflicting, say so briefly.
+Use one to three short sentences maximum.
+""".strip()
+
+    full_prompt = f"""
+{system_prompt}
+
+User question:
+{user_question}
+
+Web search results:
+{search_results_text}
+
+Assistant:
+""".strip()
+
+    response = requests.post(
+        "http://localhost:11434/api/generate",
+        json={
+            "model": OLLAMA_MODEL,
+            "prompt": full_prompt,
+            "stream": False
+        },
+        timeout=120
+    )
+    response.raise_for_status()
+    return response.json()["response"].strip()
+
+
+def should_force_web_search(user_text: str) -> bool:
+    text = user_text.lower()
+    return any(keyword in text for keyword in CURRENT_INFO_KEYWORDS)
+
+
+def answer_question(user_text: str) -> str:
+    global CHAT_HISTORY
+
+    if should_force_web_search(user_text):
+        print("Forcing web search for current info...")
+
+        try:
+            search_results = search_web(user_text, max_results=3)
+        except Exception as e:
+            print("Web search error:", e)
+            return "I couldn't search the web right now."
+
+        if not search_results:
+            return "I couldn't find anything useful online."
+
+        search_results_text = format_search_results(search_results)
+
+        try:
+            reply = summarize_search_results(user_text, search_results_text)
+        except Exception as e:
+            print("Search summary error:", e)
+            top = search_results[0]
+            snippet = top["snippet"].strip()
+            reply = snippet if snippet else f"I found something relevant: {top['title']}."
+    else:
+        try:
+            first_reply = ask_ai(user_text)
+        except Exception as e:
+            print("Primary AI error:", e)
+            return "I ran into a problem answering that."
+
+        if first_reply == "SEARCH_WEB":
+            print("AI requested web search...")
+
+            try:
+                search_results = search_web(user_text, max_results=3)
+            except Exception as e:
+                print("Web search error:", e)
+                return "I couldn't search the web right now."
+
+            if not search_results:
+                return "I couldn't find anything useful online."
+
+            search_results_text = format_search_results(search_results)
+
+            try:
+                reply = summarize_search_results(user_text, search_results_text)
+            except Exception as e:
+                print("Search summary error:", e)
+                top = search_results[0]
+                snippet = top["snippet"].strip()
+                reply = snippet if snippet else f"I found something relevant: {top['title']}."
+        else:
+            reply = first_reply
+
+    CHAT_HISTORY.append({"role": "User", "content": user_text})
+    CHAT_HISTORY.append({"role": "Assistant", "content": reply})
+    CHAT_HISTORY = CHAT_HISTORY[-(MAX_HISTORY_EXCHANGES * 2):]
+
+    return reply
 
 
 def main():
@@ -298,8 +492,8 @@ def main():
                     set_status('Press or say "Alexa" to activate')
                     continue
 
-                print("Querying Ollama...")
-                reply = ask_ai(user_text)
+                print("Answering question...")
+                reply = answer_question(user_text)
                 print("AI:", reply)
 
                 if not reply:

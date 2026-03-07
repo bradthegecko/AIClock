@@ -1,14 +1,14 @@
 import subprocess
 
-VOICE_MODEL = "voices/en_US-libritts_r-medium.onnx"
-SPEAKER_ID = 797
+VOICE_MODEL = "voices/en_GB-northern_english_male-medium.onnx"
+#SPEAKER_ID = 797 this is in case the model has more than one voice
 AUDIO_DEVICE = "plughw:CARD=UACDemoV10,DEV=0"
 
 def speak(text):
     cmd = [
         "piper",
         "--model", VOICE_MODEL,
-        "--speaker", str(SPEAKER_ID),
+	#"--speaker", str(SPEAKER_ID),   also in case the model has more than one voice
         "--output-raw",
     ]
 
