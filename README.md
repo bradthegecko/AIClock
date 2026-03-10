@@ -35,26 +35,44 @@ To be inserted
 
 ## Voice Pipeline:
 Wake Word
+
    ↓
+   
 Audio Recording
+
    ↓
+   
 Speech Transcription (Whisper)
+
    ↓
+   
 AI Processing (Ollama)
+
    ↓
+   
 Optional Web Search
+
    ↓
+   
 AI Summary
+
    ↓
+   
 Text To Speech (Piper)
 
 ## Display Pipeline:
 controller.py
-      ↓
+
+   ↓
+      
 status.json
-      ↓
+
+   ↓
+      
 clock_display.html
-      ↓
+
+   ↓
+      
 Chromium fullscreen
 
 # Hardware
@@ -88,45 +106,45 @@ Chromium fullscreen
 
 # Project Structure
 
-AIClock/
-│
-├── controller.py
-├── clock_display.html
-├── tts.py
-├── speech_test.py
-├── status.json
-│
-├── backgrounds/
-│ └── background1.jpg
-│
-├── wakewords/
-│ └── custom_wakeword.onnx
-│
-├── requirements.txt
-└── README.md
+      AIClock/
+      │
+      ├── controller.py
+      ├── clock_display.html
+      ├── tts.py
+      ├── speech_test.py
+      ├── status.json
+      │
+      ├── backgrounds/
+      │ └── background1.jpg
+      │
+      ├── wakewords/
+      │ └── custom_wakeword.onnx
+      │
+      ├── requirements.txt
+      └── README.md
 
 --- 
 
 # Installation
 ## Clone the repository:
-git clone https://github.com/bradthegecko/AIClock.git
-cd AIClock
+      git clone https://github.com/bradthegecko/AIClock.git
+      cd AIClock
 ## Create a virtual environment:
-python -m venv venv
-source venv/bin/activate
+      python -m venv venv
+      source venv/bin/activate
 
 ## Install dependencies:
-pip install -r requirements.txt
+      pip install -r requirements.txt
 
 ## Install an Ollama model (llama3.2:3b):
 
-ollama pull llama3.2
+      ollama pull llama3.2
 
 ---
 
 # Running the Clock
 ## start the main controller:
-python controller.py
+      python controller.py
 
 The display will automatically launch in fullscreen mode
 
@@ -135,7 +153,7 @@ The display will automatically launch in fullscreen mode
 Wake word detection uses **openWakeWord**.
 supported model format: .onnx
 
-place wake word models in the 'wakewords/' directory and update the model path in 'controller.py'.
+place wake word models in the 'wakewords/' directory and update the model path in `controller.py`.
 
 ---
 # Weather System
@@ -159,13 +177,21 @@ If the AI cannot answer a question using its local knowledge, the system perform
 Workflow:
 
 User question
+
 ↓
+
 Local AI attempt
+
 ↓
+
 If AI returns SEARCH_WEB
+
 ↓
+
 DuckDuckGo search
+
 ↓
+
 AI summarizes results
 
 
@@ -192,7 +218,8 @@ The UI uses semi-transparent panels over customizable background images.
 ### Microphone or speaker not detected
 
 Check available audio devices:
-arecord -l
+
+      arecord -l
 
 
 Update the microphone and speaker device in `controller.py`.
