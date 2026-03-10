@@ -111,7 +111,6 @@ Chromium fullscreen
       ├── controller.py
       ├── clock_display.html
       ├── tts.py
-      ├── speech_test.py
       ├── status.json
       │
       ├── backgrounds/
