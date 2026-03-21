@@ -218,7 +218,9 @@ The UI uses semi-transparent panels over customizable background images.
 
 Check available audio devices:
 
-      arecord -l
+      arecord -l # input devices (microphones)
+      aplay -l     # output devices (speakers)  
+
 
 
 Update the microphone and speaker device in `controller.py`.
