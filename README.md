@@ -9,7 +9,11 @@ The clock displays time and weather while listening for a custom wake word ("Oli
 
 ## Video Demo
 
-To be inserted
+
+https://github.com/user-attachments/assets/79c00fcf-246e-4b2e-8291-1ca6b1809b49
+
+
+
 
 ## Images
 ### Clock Interface
