@@ -13,7 +13,9 @@ To be inserted
 
 ## Images
 ### Clock Interface
-To be inserted
+cloudy night example:
+<img width="1589" height="955" alt="Display Screen" src="https://github.com/user-attachments/assets/135b6fa8-571f-480f-97c6-2c6f9db0fd52" />
+ 
 
 ### Hardware Setup
 To be inserted
