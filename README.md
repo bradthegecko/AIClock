@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/79c00fcf-246e-4b2e-8291-1ca6b1809b49
 ## Images
 ### Clock Interface
 cloudy night example:
-<img width="1589" height="955" alt="Display Screen" src="https://github.com/user-attachments/assets/135b6fa8-571f-480f-97c6-2c6f9db0fd52" />
+
  
 
 ### Hardware Setup
