@@ -18,7 +18,20 @@ cloudy night example:
  
 
 ### Hardware Setup
-To be inserted
+![IMG_5308](https://github.com/user-attachments/assets/674d4d0a-c985-4e55-9a4d-1f3919d8b33c)
+
+
+![IMG_5297](https://github.com/user-attachments/assets/0ecb2bf1-c4ce-4013-be5e-187c3a771f4f)
+
+
+![IMG_5294](https://github.com/user-attachments/assets/7c777e30-71e2-440c-838d-261bedb0be51)
+
+
+![IMG_5295](https://github.com/user-attachments/assets/2e3172e3-e5aa-4e19-bb8b-5021e6921580)
+
+Stand:
+<img width="1456" height="1200" alt="image" src="https://github.com/user-attachments/assets/3237e9dd-2529-4991-a35e-2eda8053bb5f" />
+
 
 # Features
 - Custom wake word detection
@@ -88,7 +101,7 @@ Chromium fullscreen
 ## Optional Hardware:
 
 - Cooling fan (Highly Recomended)
-- NVMe SSD Storage (Highly Recomended)
+- NVMe SSD Storage + tophat (Highly Recomended)
 
 ---
 
