@@ -1,7 +1,7 @@
 # AIClock ("Oliver")
-A voice-activated AI smart clock powered by a Raspberry Pi that combines a touchscreen interface, wake-word detection (openWakeWord), speech recognition (Whisper), local AI (Ollama 3.2:3B), text-to-speech (Piper), and optional internet search fallback.
+A voice-activated AI smart clock powered by a Raspberry Pi 5 that combines a touchscreen interface, wake-word detection (openWakeWord), speech recognition (Whisper), local AI (Ollama 3.2:3B), text-to-speech (Piper), and optional internet search fallback.
 
-The clock displays time and weather while listening for a custom wake word. Once activated, it records speech, processes the request using a local AI model, optionally searches the internet for current information, and speaks the response.
+The clock displays time and weather while listening for a custom wake word ("Oliver"). Once activated, it records speech, processes the request using a local AI model, optionally searches the internet for current information, and speaks the response.
 
 ---
 
@@ -49,7 +49,7 @@ Stand:
 # System Architecture
 
 ## Voice Pipeline:
-Wake Word
+Wake Word (OpenWakeWord)
 
    ↓
    
